@@ -5,6 +5,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import ChannelView from 'components/channel_view/index';
+import ChannelScheduleView from 'components/channel_schedule_view/index';
 import {browserHistory} from 'utils/browser_history';
 import Constants from 'utils/constants.jsx';
 
@@ -40,6 +41,7 @@ export default class ChannelIdentifierRouter extends React.PureComponent {
         if (this.props.match.params.team !== prevProps.match.params.team ||
             this.props.match.params.identifier !== prevProps.match.params.identifier) {
             clearTimeout(this.replaceUrlTimeout);
+            //this.state.isScheduleView = this.props.match.params.identifier === 'schedule';
             this.props.actions.onChannelByIdentifierEnter(this.props);
             this.replaceUrlIfPermalink();
         }
@@ -63,6 +65,10 @@ export default class ChannelIdentifierRouter extends React.PureComponent {
     }
 
     render() {
-        return <ChannelView/>;
+        if( this.props.match.params.identifier === 'sschedule') {
+            return <ChannelScheduleView/>;
+        } else {
+            return <ChannelView/>;
+        }
     }
 }

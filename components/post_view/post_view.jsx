@@ -73,6 +73,7 @@ export default class PostView extends React.PureComponent {
                 role='main'
             >
                 <PostList
+                    channel={this.props.channel}
                     unreadChunkTimeStamp={this.state.unreadChunkTimeStamp}
                     channelId={this.props.channelId}
                     changeUnreadChunkTimeStamp={this.changeUnreadChunkTimeStamp}

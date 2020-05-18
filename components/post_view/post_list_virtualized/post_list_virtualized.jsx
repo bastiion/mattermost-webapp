@@ -63,6 +63,7 @@ class PostList extends React.PureComponent {
          */
         channelId: PropTypes.string.isRequired,
 
+        channel: PropTypes.object,
         /**
          * Used for disabling auto retry of posts and enabling manual link for loading posts
          */
@@ -306,6 +307,7 @@ class PostList extends React.PureComponent {
                 className={className}
             >
                 <PostListRow
+                    channel={this.props.channel}
                     listId={itemId}
                     previousListId={getPreviousPostId(data, index)}
                     shouldHighlight={itemId === this.props.focusedPostId}
@@ -516,11 +518,14 @@ class PostList extends React.PureComponent {
 
     render() {
         const channelId = this.props.channelId;
+        //const channel = this.props.channel;
         let ariaLabel;
         if (this.props.latestAriaLabelFunc && this.props.postListIds.indexOf(PostListRowListIds.START_OF_NEW_MESSAGES) >= 0) {
             ariaLabel = this.props.latestAriaLabelFunc(this.props.intl);
         }
         const {dynamicListStyle} = this.state;
+
+        const _postListIds = this.state.postListIds; //(channel.name === 'schedule') ? this.state.postListIds.filter(id => id === PostListRowListIds.CHANNEL_INTRO_MESSAGE) : this.state.postListIds;
 
         return (
             <div
@@ -574,8 +579,8 @@ class PostList extends React.PureComponent {
                                             height={height}
                                             width={width}
                                             className='post-list__dynamic'
-                                            itemCount={this.state.postListIds.length}
-                                            itemData={this.state.postListIds}
+                                            itemCount={_postListIds.length}
+                                            itemData={_postListIds}
                                             itemKey={this.itemKey}
                                             overscanCountForward={OVERSCAN_COUNT_FORWARD}
                                             overscanCountBackward={OVERSCAN_COUNT_BACKWARD}

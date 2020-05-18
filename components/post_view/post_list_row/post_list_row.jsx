@@ -14,6 +14,7 @@ import NewMessageSeparator from 'components/post_view/new_message_separator/new_
 import ChannelIntroMessage from 'components/post_view/channel_intro_message/';
 import {isIdNotPost} from 'utils/post_utils';
 import {PostListRowListIds, Locations} from 'utils/constants';
+import ConferenceSchedule from "../conference_schedule/conference_schedule";
 
 export default class PostListRow extends React.PureComponent {
     static propTypes = {
@@ -66,7 +67,8 @@ export default class PostListRow extends React.PureComponent {
     }
 
     render() {
-        const {listId, previousListId} = this.props;
+        const {listId, previousListId, channel} = this.props;
+        console.log(listId);
 
         if (PostListUtils.isDateLine(listId)) {
             const date = PostListUtils.getDateForDateLine(listId);
@@ -86,9 +88,15 @@ export default class PostListRow extends React.PureComponent {
         }
 
         if (listId === PostListRowListIds.CHANNEL_INTRO_MESSAGE) {
-            return (
-                <ChannelIntroMessage/>
-            );
+            if(channel && channel.name === 'schedule') {
+                return (
+                    <ConferenceSchedule/>
+                );
+            }  else  {
+                return (
+                    <ChannelIntroMessage/>
+                );
+            }
         }
 
         if (listId === PostListRowListIds.LOAD_OLDER_MESSAGES_TRIGGER || listId === PostListRowListIds.LOAD_NEWER_MESSAGES_TRIGGER) {

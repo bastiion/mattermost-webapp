@@ -32,6 +32,8 @@ import ChannelCreate from './channel_create';
 import ChannelMore from './channel_more';
 import ChannelName from './channel_name';
 import MorePublicDirectChannels from './more_public_direct_channels';
+import YoutubeVideo from "components/youtube_video";
+import ReactPlayer from "react-player";
 
 export function renderView(props) {
     return (
@@ -714,6 +716,11 @@ class LegacySidebar extends React.PureComponent {
                 />
             );
         }
+        const metadata = {
+            title: "test",
+            images: [{url: ""}]
+
+        };
 
         return (
             <div

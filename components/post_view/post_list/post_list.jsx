@@ -34,6 +34,8 @@ export default class PostList extends React.PureComponent {
          */
         channelId: PropTypes.string,
 
+        channel: PropTypes.object,
+
         /*
          * To get posts for perma view
          */
@@ -295,6 +297,7 @@ export default class PostList extends React.PureComponent {
                         className='post-list__content'
                     >
                         <VirtPostList
+                            channel={this.props.channel}
                             loadingNewerPosts={this.state.loadingNewerPosts}
                             loadingOlderPosts={this.state.loadingOlderPosts}
                             atOldestPost={this.props.atOldestPost}
