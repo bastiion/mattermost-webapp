@@ -1,4 +1,4 @@
-.conference-schedule {
+.conference-schedule, .channel_schedule, .channel_schedule2 {
 
     font-family: Helvetica;
     margin-left: 2em;
@@ -30,6 +30,10 @@
         text-transform: uppercase;
     }
 
+    .app__body .post__body hr {
+        background-color: #ED1C24 !important;
+    }
+
     hr {
         border: none;
         background-color: #ED1C24;
@@ -39,7 +43,7 @@
         margin-right: 0;
     }
 
-    .schedule-time {
+    .schedule-time, h5 {
         color: #ED1C24;
         float: right;
     }

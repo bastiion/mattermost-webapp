@@ -69,6 +69,7 @@ export default class PostView extends React.PureComponent {
 
         return (
             <div
+                className={'channel_'+this.props.channel.name}
                 id='post-list'
                 role='main'
             >

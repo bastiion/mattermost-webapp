@@ -68,7 +68,6 @@ export default class PostListRow extends React.PureComponent {
 
     render() {
         const {listId, previousListId, channel} = this.props;
-        console.log(listId);
 
         if (PostListUtils.isDateLine(listId)) {
             const date = PostListUtils.getDateForDateLine(listId);
@@ -88,10 +87,8 @@ export default class PostListRow extends React.PureComponent {
         }
 
         if (listId === PostListRowListIds.CHANNEL_INTRO_MESSAGE) {
-            if(channel && channel.name === 'schedule') {
-                return (
-                    <ConferenceSchedule/>
-                );
+            if(channel && channel.name === 'schedule' || channel.name === 'schedule2') {
+                return null;
             }  else  {
                 return (
                     <ChannelIntroMessage/>
