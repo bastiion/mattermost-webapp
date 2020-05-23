@@ -14,7 +14,6 @@ import NewMessageSeparator from 'components/post_view/new_message_separator/new_
 import ChannelIntroMessage from 'components/post_view/channel_intro_message/';
 import {isIdNotPost} from 'utils/post_utils';
 import {PostListRowListIds, Locations} from 'utils/constants';
-import ConferenceSchedule from "../conference_schedule/conference_schedule";
 
 export default class PostListRow extends React.PureComponent {
     static propTypes = {
