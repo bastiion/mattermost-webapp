@@ -646,6 +646,14 @@
     font-size: 13px;
     padding: 6px 0 0;
     position: relative;
+    background-image: url("../images/banner2_1.png");
+    -webkit-box-pack: justify !important;
+    -ms-flex-pack: justify !important;
+    justify-content: space-between !important;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    background-size: 388px auto;
+    height: 94px;
 
     .help__text {
         text-align: right;
