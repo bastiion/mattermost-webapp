@@ -36,7 +36,11 @@ export default class ReactVideoPlayer extends React.PureComponent {
         );
 
         let content = (
-            <ReactPlayer url={this.props.link} ></ReactPlayer>
+            <ReactPlayer
+                url={this.props.link}
+                controls={true}
+                width="100%"
+            ></ReactPlayer>
         )
 
 
