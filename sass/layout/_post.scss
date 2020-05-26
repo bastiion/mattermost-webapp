@@ -205,10 +205,28 @@
         }
     }
 
+
     .post-list-holder-by-time {
         height: 100%;
         width: 100%;
         position: absolute;
+
+        display: flex;
+        flex-wrap: wrap;
+
+
+        &>.post-list__table {
+            flex: 1 1 200px;
+        }
+
+        &>.embedded-video-player {
+            flex: 3 1 200px;
+            .videoiframe {
+                height: 100%;
+                width: 100%;
+            }
+        }
+
         &.active {
             display: inline;
         }

@@ -21,6 +21,8 @@ import FloatingTimestamp from 'components/post_view/floating_timestamp';
 import PostListRow from 'components/post_view/post_list_row';
 import ScrollToBottomArrows from 'components/post_view/scroll_to_bottom_arrows';
 import ToastWrapper from 'components/toast_wrapper';
+import ReactPlayer from "react-player";
+import ReactVideoPlayer from "../../react_video_player/react_video_player";
 
 const OVERSCAN_COUNT_BACKWARD = window.OVERSCAN_COUNT_BACKWARD || 80; // Exposing the value for PM to test will be removed soon
 const OVERSCAN_COUNT_FORWARD = window.OVERSCAN_COUNT_FORWARD || 80; // Exposing the value for PM to test will be removed soon
@@ -518,7 +520,7 @@ class PostList extends React.PureComponent {
 
     render() {
         const channelId = this.props.channelId;
-        //const channel = this.props.channel;
+        const channel = this.props.channel;
         let ariaLabel;
         if (this.props.latestAriaLabelFunc && this.props.postListIds.indexOf(PostListRowListIds.START_OF_NEW_MESSAGES) >= 0) {
             ariaLabel = this.props.latestAriaLabelFunc(this.props.intl);
@@ -526,6 +528,26 @@ class PostList extends React.PureComponent {
         const {dynamicListStyle} = this.state;
 
         const _postListIds = this.state.postListIds; //(channel.name === 'schedule') ? this.state.postListIds.filter(id => id === PostListRowListIds.CHANNEL_INTRO_MESSAGE) : this.state.postListIds;
+
+        let videoPlayer;
+        if(channel && ReactVideoPlayer.isVideoLink(channel.purpose)) {
+           videoPlayer = (
+
+               <div
+                   className='embedded-video-player'
+                   key={'video-player-' + channelId}
+               >
+                   <ReactPlayer
+                        url={channel.purpose}
+                        controls={true}
+                        width="100%"
+                        height="100%"
+                        />
+               </div>
+
+           )
+       }
+
 
         return (
             <div
@@ -556,6 +578,7 @@ class PostList extends React.PureComponent {
                     className='post-list-holder-by-time'
                     key={'postlist-' + channelId}
                 >
+                    {videoPlayer}
                     <div
                         role='presentation'
                         className='post-list__table'
