@@ -86,7 +86,7 @@ export default class PostListRow extends React.PureComponent {
         }
 
         if (listId === PostListRowListIds.CHANNEL_INTRO_MESSAGE) {
-            if(channel && channel.name === 'schedule' || channel.name === 'schedule2') {
+            if(channel && (channel.name === 'schedule' || channel.name === 'schedule2' || channel.name === 'programm')) {
                 return null;
             }  else  {
                 return (
