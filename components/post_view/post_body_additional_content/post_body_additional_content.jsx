@@ -8,6 +8,7 @@ import MessageAttachmentList from 'components/post_view/message_attachments/mess
 import PostAttachmentOpenGraph from 'components/post_view/post_attachment_opengraph';
 import PostImage from 'components/post_view/post_image';
 import YoutubeVideo from 'components/youtube_video';
+import ReactVideoPlayer from "components/react_video_player";
 
 export default class PostBodyAdditionalContent extends React.PureComponent {
     static propTypes = {
@@ -118,6 +119,16 @@ export default class PostBodyAdditionalContent extends React.PureComponent {
                         show={this.props.isEmbedVisible}
                     />
                 );
+            }
+            console.log(`${embed.url} is Video Link ${ReactVideoPlayer.isVideoLink(embed.url)}`);
+
+            if(ReactVideoPlayer.isVideoLink(embed.url)) {
+                return (
+                    <ReactVideoPlayer
+                        postId={this.props.post.id}
+                        link={embed.url}
+                        show={this.props.isEmbedVisible} />
+                )
             }
 
             return (
