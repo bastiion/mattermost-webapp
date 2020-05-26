@@ -16,7 +16,9 @@ import FormattedMarkdownMessage from 'components/formatted_markdown_message';
 
 export default class ChannelView extends React.PureComponent {
     static propTypes = {
+        userRoles: PropTypes.array,
         channelId: PropTypes.string.isRequired,
+        channelName: PropTypes.string.isRequired,
         deactivatedChannel: PropTypes.bool.isRequired,
         match: PropTypes.shape({
             url: PropTypes.string.isRequired,
@@ -50,7 +52,11 @@ export default class ChannelView extends React.PureComponent {
         const focusedPostId = props.match.params.postid;
 
         if (props.match.url !== state.url && props.channelId !== state.channelId) {
-            updatedState = {deferredPostView: ChannelView.createDeferredPostView(), url: props.match.url, focusedPostId};
+            updatedState = {
+                deferredPostView: ChannelView.createDeferredPostView(),
+                url: props.match.url,
+                focusedPostId
+            };
         }
 
         if (props.channelId !== state.channelId) {
@@ -135,17 +141,31 @@ export default class ChannelView extends React.PureComponent {
                 </div>
             );
         } else {
-            createPost = (
-                <div
-                    className='post-create__container'
-                    id='post-create'
-                >
-                    {!channelIsArchived &&
+            if (['programm', 'schedule', 'schedule2'].indexOf(this.props.channelName) >= 0 &&
+                this.props.userRoles.indexOf('system_admin') < 0 &&
+                this.props.userRoles.indexOf('team_admin') < 0) {
+                createPost = (
+                    <div
+                        className='post-create-message'
+                    >
+                        <FormattedMessage
+                            id='create_post.readonly'
+                            defaultMessage='You are viewing a read only channel.'
+                        />
+                    </div>
+                )
+            } else {
+                createPost = (
+                    <div
+                        className='post-create__container'
+                        id='post-create'
+                    >
+                        {!channelIsArchived &&
                         <CreatePost
                             getChannelView={this.getChannelView}
                         />
-                    }
-                    {channelIsArchived &&
+                        }
+                        {channelIsArchived &&
                         <div
                             id='channelArchivedMessage'
                             className='channel-archived__message'
@@ -164,9 +184,10 @@ export default class ChannelView extends React.PureComponent {
                                 />
                             </button>
                         </div>
-                    }
-                </div>
-            );
+                        }
+                    </div>
+                );
+            }
         }
 
         const DeferredPostView = this.state.deferredPostView;

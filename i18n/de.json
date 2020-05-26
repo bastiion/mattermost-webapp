@@ -2146,6 +2146,7 @@
   "create_comment.files": "Dateien werden hochgeladen",
   "create_post.comment": "Kommentar",
   "create_post.deactivated": "Sie betrachten einen archivierten Kanal mit einem deaktivierten Benutzer.",
+  "create_post.readonly": "Sie betrachten einen schreibgeschützten Kanal.",
   "create_post.error_message": "Ihre Nachricht ist zu lang. Zeichenanzahl: {length}/{limit}",
   "create_post.fileProcessing": "Verarbeitung...",
   "create_post.icon": "Eine Nachricht erstellen",

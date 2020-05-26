@@ -16,6 +16,7 @@ import {TutorialSteps, Preferences} from 'utils/constants';
 import {goToLastViewedChannel} from 'actions/views/channel';
 
 import ChannelView from './channel_view.jsx';
+import {getMySystemRoles} from "mattermost-redux/selectors/entities/roles_helpers";
 
 // Temporary selector until getDirectTeammate is converted to be redux-friendly
 const getDeactivatedChannel = createSelector(
@@ -34,8 +35,11 @@ function mapStateToProps(state) {
     const enableTutorial = config.EnableTutorial === 'true';
     const tutorialStep = getInt(state, Preferences.TUTORIAL_STEP, getCurrentUserId(state), TutorialSteps.FINISHED);
     const viewArchivedChannels = config.ExperimentalViewArchivedChannels === 'true';
+    const userRoles = Array.from(getMySystemRoles(state));
 
     return {
+        userRoles: userRoles,
+        channelName: channel ? channel.name : '',
         channelId: channel ? channel.id : '',
         deactivatedChannel: channel ? getDeactivatedChannel(state, channel.id) : false,
         showTutorial: enableTutorial && tutorialStep <= TutorialSteps.INTRO_SCREENS,
