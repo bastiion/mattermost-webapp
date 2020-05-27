@@ -221,10 +221,7 @@
 
         &>.embedded-video-player {
             flex: 3 1 200px;
-            .videoiframe {
-                height: 100%;
-                width: 100%;
-            }
+            background-color: #000000;
         }
 
         &.active {
@@ -670,8 +667,8 @@
     justify-content: space-between !important;
     background-repeat: no-repeat;
     background-position: 50%;
-    background-size: 388px auto;
-    height: 94px;
+    background-size: 190px auto;
+    height: 50px;
 
     .help__text {
         text-align: right;

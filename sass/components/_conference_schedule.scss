@@ -1,3 +1,14 @@
+.app__body .channel_programm .post__body hr {
+    opacity: 1;
+    background-color: #ED1C24 !important;
+    border: none;
+    height: 2px;
+    width: 30%;
+    margin-left: auto;
+    margin-right: 0;
+}
+
+
 .conference-schedule, .channel_schedule, .channel_schedule2, .channel_programm {
 
     font-family: Helvetica;
@@ -28,10 +39,6 @@
     h4 {
         font-size: 10pt;
         text-transform: uppercase;
-    }
-
-    .app__body .post__body hr {
-        background-color: #ED1C24 !important;
     }
 
     hr {
