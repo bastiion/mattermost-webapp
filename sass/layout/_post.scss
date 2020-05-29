@@ -661,14 +661,28 @@
     font-size: 13px;
     padding: 6px 0 0;
     position: relative;
-    background-image: url("../images/banner2_1.png");
     -webkit-box-pack: justify !important;
     -ms-flex-pack: justify !important;
     justify-content: space-between !important;
-    background-repeat: no-repeat;
-    background-position: 50%;
-    background-size: 190px auto;
-    height: 50px;
+
+    @media screen and (orientation:portrait) {
+        background-image: url("../images/banner2_1.png");
+        background-repeat: no-repeat;
+        background-position: 50% 2em;
+        background-size: auto 60%;
+        min-height: 7em;
+    }
+
+    @media screen and (min-width: 768px) {
+        background-image: url("../images/banner2_1.png");
+        background-repeat: no-repeat;
+        background-position: 50% 2em;
+        background-size: auto 60%;
+        min-height: 7em;
+    }
+    @media screen and (orientation:landscape) and (max-width: 767px) {
+        background: none;
+    }
 
     .help__text {
         text-align: right;
