@@ -28,6 +28,8 @@ export default class A11yController {
         this.f6KeyIsPressed = false;
         this.upArrowKeyIsPressed = false;
         this.downArrowKeyIsPressed = false;
+        this.endKeyIsPressed = false;
+        this.homeKeyIsPressed = false;
         this.tabKeyIsPressed = false;
         this.tildeKeyIsPressed = false;
         this.lKeyIsPressed = false;
@@ -160,6 +162,8 @@ export default class A11yController {
         return this.f6KeyIsPressed ||
                this.upArrowKeyIsPressed ||
                this.downArrowKeyIsPressed ||
+               this.endKeyIsPressed ||
+               this.homeKeyIsPressed ||
                this.tabKeyIsPressed ||
                this.tildeKeyIsPressed ||
                this.lKeyIsPressed;
@@ -235,6 +239,46 @@ export default class A11yController {
         this.setActiveRegion(newRegion);
         this.setCurrentFocus();
         this.resetNavigation = false;
+    }
+
+    /**
+     * Determines the last section, sets it as active and updates the current focus
+     */
+    lastSection() {
+        const sections = this.sections;
+        if (
+            this.modalIsOpen ||
+            this.popupIsOpen ||
+            !sections ||
+            !sections.length ||
+            this.activeSectionIndex >= sections.length - 1
+        ) {
+            return;
+        }
+        let newSection = sections[sections.length - 1];
+        this.setActiveSection(newSection);
+        this.setCurrentFocus();
+        this.resetNavigation = true;
+    }
+
+    /**
+     * Determines the first section, sets it as active and updates the current focus
+     */
+    firstSection() {
+        const sections = this.sections;
+        if (
+            this.modalIsOpen ||
+            this.popupIsOpen ||
+            !sections ||
+            !sections.length ||
+            this.activeSectionIndex === 0
+        ) {
+            return;
+        }
+        let newSection = sections[0];
+        this.setActiveSection(newSection);
+        this.setCurrentFocus();
+        this.resetNavigation = true;
     }
 
     /**
@@ -552,6 +596,8 @@ export default class A11yController {
         this.upArrowKeyIsPressed = false;
         this.downArrowKeyIsPressed = false;
         this.tabKeyIsPressed = false;
+        this.endKeyIsPressed = false;
+        this.homeKeyIsPressed = false;
         this.tildeKeyIsPressed = false;
         this.enterKeyIsPressed = false;
         this.lKeyIsPressed = false;
@@ -682,6 +728,7 @@ export default class A11yController {
     // event handling methods
 
     handleKeyDown = (event) => {
+        console.log("handle key down");
         const modifierKeys = {
             ctrlIsPressed: event.ctrlKey,
             altIsPressed: event.altKey,
@@ -749,6 +796,30 @@ export default class A11yController {
                 this.previousSection();
             } else {
                 this.nextSection();
+            }
+            break;
+        case isKeyPressed(event, Constants.KeyCodes.HOME):
+            this.lastInputEventIsKeyboard = true;
+            if (!this.navigationInProgress || !this.sections || !this.sections.length) {
+                return;
+            }
+            event.preventDefault();
+            if (this.shouldReverseSections) {
+                this.firstSection();
+            } else {
+                this.lastSection();
+            }
+            break;
+        case isKeyPressed(event, Constants.KeyCodes.END):
+            this.lastInputEventIsKeyboard = true;
+            if (!this.navigationInProgress || !this.sections || !this.sections.length) {
+                return;
+            }
+            event.preventDefault();
+            if (this.shouldReverseSections) {
+                this.lastSection();
+            } else {
+                this.firstSection();
             }
             break;
         case isKeyPressed(event, Constants.KeyCodes.ESCAPE):
