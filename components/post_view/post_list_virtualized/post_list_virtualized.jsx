@@ -539,6 +539,7 @@ class PostList extends React.PureComponent {
                >
                    <ReactPlayer
                         url={channel.purpose}
+                        playing={true}
                         controls={true}
                         width="100%"
                         height="100%"
