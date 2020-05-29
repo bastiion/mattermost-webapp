@@ -217,10 +217,10 @@ export default class Root extends React.Component {
             mobileLanding = iosDownloadLink;
         }
 
-        if (mobileLanding && !BrowserStore.hasSeenLandingPage() && !toResetPasswordScreen && !this.props.location.pathname.includes('/landing')) {
+        /*if (mobileLanding && !BrowserStore.hasSeenLandingPage() && !toResetPasswordScreen && !this.props.location.pathname.includes('/landing')) {
             this.props.history.push('/landing#' + this.props.location.pathname + this.props.location.search);
             BrowserStore.setLandingPageSeen(true);
-        }
+        }*/
     }
 
     componentDidUpdate(prevProps) {
