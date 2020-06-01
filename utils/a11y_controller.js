@@ -728,7 +728,6 @@ export default class A11yController {
     // event handling methods
 
     handleKeyDown = (event) => {
-        console.log("handle key down");
         const modifierKeys = {
             ctrlIsPressed: event.ctrlKey,
             altIsPressed: event.altKey,
